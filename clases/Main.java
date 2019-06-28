@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.Date;
 import jcuda.Pointer;
 import jcuda.Sizeof;
@@ -19,7 +18,7 @@ import static jcuda.driver.JCudaDriver.cuMemcpyHtoD;
 
 public class Main {
 
-    public static final int n = 12_000_000;
+    public static final int n = 10_000_000;
     public static int a[] = new int[n];
 
     static {
@@ -103,7 +102,7 @@ public class Main {
                 Pointer.to(outPut)
         );
 
-        int blockSizeX = 512;
+        int blockSizeX = 1024; //2.579
         int gridSizeX = (int) Math.ceil((double) n / blockSizeX);
         JCudaDriver.cuLaunchKernel(funcion,
                 gridSizeX, 1, 1,
